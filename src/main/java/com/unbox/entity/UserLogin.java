@@ -13,7 +13,7 @@ public class UserLogin {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="user_id")
+	@Column(name="user_Id")
 	private long id;
 	@Column(name="userName")
 	private String name;
