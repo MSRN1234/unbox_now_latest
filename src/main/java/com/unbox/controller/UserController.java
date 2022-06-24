@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.unbox.entity.UserLogin;
 import com.unbox.service.UserLoginService;
 
-
 @RestController
 public class UserController {
 
@@ -20,9 +19,9 @@ public class UserController {
 
     private BCryptPasswordEncoder bcrypt;
 	
-	@PostMapping("/signup")
+	@PostMapping("/signUp")
 	public String save(@RequestBody UserLogin userLogin) {
-		UserLogin userLogin1=userLoginService.findByName(userLogin.getName());
+		UserLogin userLogin1=userLoginService.findByName(userLogin.getUser_name());
 	if(userLogin1==null) {
 		userLogin.setPassword(bcrypt.encode(userLogin.getPassword()));
 			userLoginService.save(userLogin);
@@ -35,10 +34,13 @@ public class UserController {
 	@GetMapping("/signIn")
 	public String signIn(@RequestBody UserLogin userLogin) {
 	 
-		UserLogin userLogin1=userLoginService.findByName(userLogin.getName());
-		boolean password=  bcrypt.matches(userLogin.getPassword(), userLogin1.getPassword());
-		if(userLogin1!=null && password==true ) {
-			return "Login Successfully";
+		UserLogin userLogin1=userLoginService.findByName(userLogin.getUser_name());
+		if(userLogin1!=null) {
+			boolean password=  bcrypt.matches(userLogin.getPassword(), userLogin1.getPassword());
+			if(userLogin1!=null && password==true ) {
+				return "Login Successfully";
+		     }
+		
 		}
 		return "Invalid username or password";
 				

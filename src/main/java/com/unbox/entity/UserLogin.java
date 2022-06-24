@@ -1,6 +1,5 @@
 package com.unbox.entity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,36 +9,31 @@ import javax.persistence.Table;
 @Entity
 @Table(name="ubn_user_login")
 public class UserLogin {
-	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="user_Id")
-	private long id;
-	@Column(name="userName")
-	private String name;
-	@Column(name="userTypeId")
-    private long userTypeId;
-	@Column(name="validated")
-    private boolean validated;
+	private Integer user_id;
+	private String user_name;
+	private Integer user_type_id;
+	private boolean validated;
 	private String password;
-	public long getId() {
-		return id;
+	public Integer getUser_id() {
+		return user_id;
 	}
-	public void setId(long id) {
-		this.id = id;
+	public void setUser_id(Integer user_id) {
+		this.user_id = user_id;
 	}
-
-	public String getName() {
-		return name;
+	
+	public String getUser_name() {
+		return user_name;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
 	}
-	public long getUserTypeId() {
-		return userTypeId;
+	public Integer getUser_type_id() {
+		return user_type_id;
 	}
-	public void setUserTypeId(long userTypeId) {
-		this.userTypeId = userTypeId;
+	public void setUser_type_id(Integer user_type_id) {
+		this.user_type_id = user_type_id;
 	}
 	public boolean isValidated() {
 		return validated;
@@ -53,8 +47,5 @@ public class UserLogin {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
-	
 
 }

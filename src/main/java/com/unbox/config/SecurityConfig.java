@@ -36,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		corsConfiguration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
 
-		corsConfiguration.setAllowedOrigins(List.of("http://localhost:3000","http://13.232.97.200/"));
+		corsConfiguration.setAllowedOrigins(List.of("http://localhost:3000","http://13.232.97.200"));
 
 		corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"));
 
@@ -47,10 +47,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().and().cors().disable().formLogin();
 
 		http.authorizeRequests()
-				.antMatchers("/signup","/signIn")
+				.antMatchers("/signUp","/signIn")
 				.permitAll()
-
-				// http.authorizeRequests().antMatchers("/addFileContent/{id}","/addContentDb","/addFileDb","/update-password/{id}","/getTopic/{type}","/verfiyEamil","/resetPass/{email}","/Admin-reset-password","/adminSignIn","/addInfo","/contactUs","/imageUploadLong/{Id}","/user/upload","/saveQuick","/getTopic/{type}","/saveContent","/getUser","/save","/sendotp","/verfiyotp","/creatorProfile/{id}","/image/{id}","/verifyEmail","/createPassword","/signIn","/Forgot-password","/verfiyotpEmail","/resetPassword/{userId}","/getEnabled/{id}","/user-profile/{id}","/getImage/{id}","/imageUploadCourse/{Id}","/imageUploadQUick/{Id}").permitAll()
 
 				.anyRequest().authenticated().and().csrf().disable().cors()
 				.configurationSource(request -> corsConfiguration);
