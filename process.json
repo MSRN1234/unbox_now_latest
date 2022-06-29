@@ -1,0 +1,20 @@
+{
+    "apps":[
+    {
+        "name":"pm2-unbox",
+        "cwd":".",
+        "script":"/usr/bin/java",
+        "args":[
+            "-jar",
+            "/home/ubuntu/unbox-cicd/Unboxnow-0.0.1-SNAPSHOT.jar"
+        ],
+        "watch":[
+            "/home/ubuntu/unbox-cicd/Unboxnow-0.0.1-SNAPSHOT.jar"
+        ],
+        "node_args":[],
+        "log_date_format":"YYYY-MM-DD HH:mm Z",
+        "exec_interpreter":"",
+        "exec_mode":"fork"
+     }
+   ]
+}
