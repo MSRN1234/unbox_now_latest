@@ -1,10 +1,12 @@
 package com.unbox.config;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.client.RestTemplate;
@@ -13,6 +15,7 @@ import org.springframework.web.cors.CorsConfiguration;
 
 
 @Configuration
+@EnableWebSecurity
 public class MyConfig extends WebSecurityConfigurerAdapter {
 	
 	
@@ -23,14 +26,43 @@ public class MyConfig extends WebSecurityConfigurerAdapter {
 	}
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		CorsConfiguration  corsConfiguration=new CorsConfiguration();
+
+		List<String> corsHeaders = new ArrayList<>();
+ 		corsHeaders.add("Authorization");
+ 		corsHeaders.add("Cache-Control");
+ 		corsHeaders.add("Content-Type");
+		corsHeaders.add("Access-Control-Allow-Origin");
+		corsHeaders.add("Accept");
+		corsHeaders.add("Origin");
+		corsHeaders.add("X-Requested-With");
+		corsHeaders.add("Access-Control-Request-Headers");
+		corsHeaders.add("Access-Control-Request-Method");
+
+ 		List<String> originsHeaders = new ArrayList<>();
+ 		originsHeaders.add("http://13.232.97.200");
+ 		originsHeaders.add("http://localhost:3000");
+
+ 		List<String> methodsHeaders = new ArrayList<>();
+ 		methodsHeaders.add("GET");
+ 		methodsHeaders.add("POST");
+ 		methodsHeaders.add("PATCH");
+ 		methodsHeaders.add("PUT");
+ 		methodsHeaders.add("DELETE");
+ 		methodsHeaders.add("OPTIONS");
+
+ 		List<String> exposedHeaders = new ArrayList<>();
+ 		exposedHeaders.add("Authorization");
+
+        CorsConfiguration  corsConfiguration=new CorsConfiguration();
 		
-		corsConfiguration.setAllowedHeaders(List.of("Authorization","Cache-Control","Content-Type"));
-		corsConfiguration.setAllowedOrigins(List.of("http://localhost:3000","http://13.232.97.200"));
+        corsConfiguration.setAllowedHeaders(corsHeaders);
+ 		corsConfiguration.setAllowedOrigins(originsHeaders);
 		
-		corsConfiguration.setAllowedMethods(List.of("GET","POST","PATCH","PUT","DELETE","OPTIONS"));
+ 		corsConfiguration.setAllowedMethods(methodsHeaders);
+
 		corsConfiguration.setAllowCredentials(true);
-		corsConfiguration.setExposedHeaders(List.of("Authorization"));
+		corsConfiguration.setExposedHeaders(exposedHeaders);
+		
 		http.csrf().and().cors().disable().formLogin();		
 		http.authorizeRequests().antMatchers("/signUp","/signIn").permitAll()
 		
