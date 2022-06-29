@@ -10,9 +10,9 @@ hooks:
   BeforeInstall:
 
   ApplicationStop:
-#     - location: scripts/stop.sh
-#       timeout: 300
-#       runas: root
+    - location: scripts/stop.sh
+      timeout: 300
+      runas: root
   ApplicationStart:
     - location: scripts/start.sh
       timeout: 300
