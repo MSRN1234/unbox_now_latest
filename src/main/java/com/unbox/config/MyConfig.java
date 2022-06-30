@@ -40,7 +40,7 @@ public class MyConfig extends WebSecurityConfigurerAdapter {
 
  		List<String> originsHeaders = new ArrayList<>();
  		originsHeaders.add("http://13.232.97.200");
- 		originsHeaders.add("http://localhost:3000");
+ 		//originsHeaders.add("http://localhost:3000");
 
  		List<String> methodsHeaders = new ArrayList<>();
  		methodsHeaders.add("GET");
