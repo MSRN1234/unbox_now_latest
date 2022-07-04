@@ -1,55 +1,65 @@
 package com.unbox.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.unbox.RequestDTO.LoginRequestDTO;
+import com.unbox.ResponseDTO.LoginResponseDTO;
 import com.unbox.entity.UserLogin;
-import com.unbox.service.UserLoginService;
+import com.unbox.service.ILoginService;
 
 @RestController
 public class UserController {
 
 	@Autowired
-	private UserLoginService userLoginService;
+	private ILoginService loginService;
 	
-	@Autowired
-    private BCryptPasswordEncoder bcrypt;
 	
 	@PostMapping("/signUp")
-	public String save(@Valid @RequestBody UserLogin userLogin) {
-		UserLogin userLogin1=userLoginService.findByName(userLogin.getUser_name());
-	if(userLogin1==null) {
-		userLogin.setPassword(bcrypt.encode(userLogin.getPassword()));
-			userLoginService.save(userLogin);
-			return "Registered successfully";
-		}
-		return " User Already Exist";
+	public ResponseEntity<?> signUp(@Valid @RequestBody LoginRequestDTO loginRequestDTO) {
+		LoginResponseDTO loginResponseDTO=loginService.signUp(loginRequestDTO);
+		Map<String,Object> map=new HashMap<String,Object>();
+		   if(loginResponseDTO.getId()!=null)
+		   {
+			   map.put("msg","signUp successfull ");
+			   map.put("data",loginResponseDTO);
+			   map.put("status",true);
+				return ResponseEntity.status(HttpStatus.OK).body(map);
+		   }	
+		   map.put("msg","signUp Failed");
+		   map.put("data",loginResponseDTO);
+		   map.put("status",false);
+			return ResponseEntity.status(HttpStatus.OK).body(map);
+		
 	}
 	
 	
 	@PostMapping("/signIn")
-	public String signIn(@RequestBody UserLogin userLogin) {
-	 
-		UserLogin userLogin1=userLoginService.findByName(userLogin.getUser_name());
-		if(userLogin1!=null) {
-			boolean password=  bcrypt.matches(userLogin.getPassword(), userLogin1.getPassword());
-			if(userLogin1!=null && password==true ) {
-				return "Login Successfully";
-		     }
-		
-		}
-		return "Invalid username or password";
+	public ResponseEntity<?> signIn(@RequestBody LoginRequestDTO loginRequestDTO) {
+		LoginResponseDTO loginResponseDTO=loginService.signIn(loginRequestDTO);
+		Map<String,Object> map=new HashMap<String,Object>();
+		   if(loginResponseDTO.getId()!=null)
+		   {
+			   map.put("msg","signIp successfull ");
+			   map.put("data",loginResponseDTO);
+			   map.put("status",true);
+				return ResponseEntity.status(HttpStatus.OK).body(map);
+		   }	
+		   map.put("msg","Bad Credentials");
+		   map.put("data",loginResponseDTO);
+		   map.put("status",false);
+			return ResponseEntity.status(HttpStatus.OK).body(map);
 				
 	}
 	
-	// update the user profile
-//	public ResponseEntity<?> updateUser(@RequestBody UserLogin userLogin, @PathVariable("user_id") Integer user_id)
-//	{
-//		Optional<UserLogin>
-//	}
+	
 }
