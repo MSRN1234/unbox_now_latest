@@ -20,20 +20,23 @@ public class UserLogin {
 	@Column(name="user_id")
 	private Integer user_id;
 	@Column(name="user_name")
-	@NotBlank
-	@Email(message="user_name must be in proper email format")
 	private String user_name;
 	@Column(name="user_type_id")
-	@NotNull
 	private Integer user_type_id;
 	@Column(name="validated")
 	private boolean validated;
 	@Column(name="password")
-	@NotBlank
-	@Size(min = 4, message = "Password must be 4 characters")
 	private String password;
+	private String signup_with;
 	
 	
+	
+	public String getSignupWith() {
+		return signup_with;
+	}
+	public void setSignupWith(String signupWith) {
+		this.signup_with = signupWith;
+	}
 	public Integer getUser_id() {
 		return user_id;
 	}
