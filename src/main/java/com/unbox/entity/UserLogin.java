@@ -19,7 +19,9 @@ public class UserLogin {
 	
 	@Column(name="user_id")
 	private Integer user_id;
-	@Column(name="user_name")
+	@Column(name="full_name")
+	private String full_name;
+    @Column(name="user_name")
 	private String user_name;
 	@Column(name="user_type_id")
 	private Integer user_type_id;
@@ -30,13 +32,6 @@ public class UserLogin {
 	private String signup_with;
 	
 	
-	
-	public String getSignupWith() {
-		return signup_with;
-	}
-	public void setSignupWith(String signupWith) {
-		this.signup_with = signupWith;
-	}
 	public Integer getUser_id() {
 		return user_id;
 	}
@@ -44,6 +39,12 @@ public class UserLogin {
 		this.user_id = user_id;
 	}
 	
+	public String getFull_name() {
+		return full_name;
+	}
+	public void setFull_name(String full_name) {
+		this.full_name = full_name;
+	}
 	public String getUser_name() {
 		return user_name;
 	}
@@ -68,5 +69,14 @@ public class UserLogin {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	
+	public String getSignup_with() {
+		return signup_with;
+	}
+	public void setSignup_with(String signup_with) {
+		this.signup_with = signup_with;
+	}
+	
 
 }
