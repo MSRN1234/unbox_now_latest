@@ -5,7 +5,7 @@ public class EmailResponseDTO {
 	private String from;
 	private String to;
 	private String text;
-	private String subject;
+	private String subject;  
 	
 	public String getFrom() {
 		return from;

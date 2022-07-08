@@ -64,7 +64,7 @@ public class MyConfig extends WebSecurityConfigurerAdapter {
 		corsConfiguration.setExposedHeaders(exposedHeaders);
 		
 		http.csrf().and().cors().disable().formLogin();		
-		http.authorizeRequests().antMatchers("/signUp","/signIn","/sendMail").permitAll()
+		http.authorizeRequests().antMatchers("/signUp","/signIn","/sendMail","/userProfile").permitAll()
 		
 		.anyRequest().authenticated().and().csrf().disable().cors().configurationSource(request->corsConfiguration);
 	}
