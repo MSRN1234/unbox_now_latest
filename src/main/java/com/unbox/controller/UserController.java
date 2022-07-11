@@ -25,22 +25,20 @@ public class UserController {
 
 	@Autowired
 	private ILoginService loginService;
-<<<<<<< HEAD
+
 	@Autowired
 	private EmailService emailService;
 	@Autowired
 	private JavaMailSender javaMailSender;
 
-=======
-	
-	
->>>>>>> parent of ea24f8a (signup and signin Apis done)
+
+
 	@PostMapping("/signUp")
 	public ResponseEntity<?> signUp(@Valid @RequestBody LoginRequestDTO loginRequestDTO) throws MessagingException {
 		LoginResponseDTO loginResponseDTO=loginService.signUp(loginRequestDTO);
 		Map<String,Object> map=new HashMap<String,Object>();
 		   if(loginResponseDTO.getId()!=null)
-<<<<<<< HEAD
+
 			   {
 			   if(loginRequestDTO.getUser_name().contains("@")) {
 				   EmailDetails emailDetails =new EmailDetails();
@@ -230,9 +228,9 @@ public class UserController {
 //				   String status= emailService.sendSimpleMail(emailDetails);
 			   }
 			  
-=======
+
 		   {
->>>>>>> parent of ea24f8a (signup and signin Apis done)
+
 			   map.put("msg","signUp successfull ");
 			   map.put("data",loginResponseDTO);
 			   map.put("status",true);
@@ -263,7 +261,7 @@ public class UserController {
 				
 	}
 	
-<<<<<<< HEAD
+
 	// email sending controller
 	@PostMapping("/sendMail")
     public String sendMail(@RequestBody EmailDetails details) {
@@ -272,8 +270,4 @@ public class UserController {
       	}
 	
 
-    
-=======
-	
->>>>>>> parent of ea24f8a (signup and signin Apis done)
 }

@@ -53,14 +53,14 @@ public class LoginServiceImp implements ILoginService {
 			
 			loginResponseDTO.setId(profile1.getUser_profile_id());
 			loginResponseDTO.setId(userLogin2.getUser_id());
-<<<<<<< HEAD
+
 			loginResponseDTO.setRole(userLogin2.getUser_type_id()==1?"Corporate":"Individual");
 			loginResponseDTO.setMessage("email sent successfully");
-=======
+
 			loginResponseDTO.setRole(userLogin2.getUser_type_id()==1?"Coporator":"Individual");
 			loginResponseDTO.setMessage("Successfull");
 			
->>>>>>> 3ff3aa2a2da01db05b6f8342894205ded5bfc501
+
 				return loginResponseDTO;
 			}
 		
