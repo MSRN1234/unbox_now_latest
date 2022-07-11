@@ -19,9 +19,7 @@ public class UserLogin {
 	
 	@Column(name="user_id")
 	private Integer user_id;
-	@Column(name="full_name")
-	private String full_name;
-    @Column(name="user_name")
+	@Column(name="user_name")
 	private String user_name;
 	@Column(name="user_type_id")
 	private Integer user_type_id;
@@ -39,12 +37,6 @@ public class UserLogin {
 		this.user_id = user_id;
 	}
 	
-	public String getFull_name() {
-		return full_name;
-	}
-	public void setFull_name(String full_name) {
-		this.full_name = full_name;
-	}
 	public String getUser_name() {
 		return user_name;
 	}

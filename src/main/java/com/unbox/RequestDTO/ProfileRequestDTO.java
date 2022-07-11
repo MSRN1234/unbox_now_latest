@@ -1,20 +1,10 @@
-package com.unbox.entity;
+package com.unbox.RequestDTO;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+public class ProfileRequestDTO {
 
-@Entity
-@Table(name="ubn_user_profile")
-public class Profile {
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-    private Integer user_profile_id;
-    private Integer user_Id;
-    private String name;
+	private Integer user_profile_id;
+    private Integer user_id;
+    private String full_name;
     private String email;
     private String mobile_no;
     private String address_Line_1;
@@ -29,16 +19,16 @@ public class Profile {
 		this.user_profile_id = user_profile_id;
 	}
 	public Integer getUser_id() {
-		return user_Id;
+		return user_id;
 	}
-	public void setUser_Id(Integer user_id) {
-		this.user_Id = user_id;
+	public void setUser_id(Integer user_id) {
+		this.user_id = user_id;
 	}
 	public String getFull_name() {
-		return name;
+		return full_name;
 	}
 	public void setFull_name(String full_name) {
-		this.name = full_name;
+		this.full_name = full_name;
 	}
 	public String getEmail() {
 		return email;
@@ -76,7 +66,6 @@ public class Profile {
 	public void setState(String state) {
 		this.state = state;
 	}
-	
 	public Integer getZipCode() {
 		return zipCode;
 	}
@@ -84,6 +73,5 @@ public class Profile {
 		this.zipCode = zipCode;
 	}
     
-   
-
+    
 }
