@@ -64,7 +64,11 @@ public class MyConfig extends WebSecurityConfigurerAdapter {
 		corsConfiguration.setExposedHeaders(exposedHeaders);
 		
 		http.csrf().and().cors().disable().formLogin();		
+<<<<<<< HEAD
 		http.authorizeRequests().antMatchers("/signUp","/signIn","/sendMail","/userProfile").permitAll()
+=======
+		http.authorizeRequests().antMatchers("/signUp","/signIn").permitAll()
+>>>>>>> parent of ea24f8a (signup and signin Apis done)
 		
 		.anyRequest().authenticated().and().csrf().disable().cors().configurationSource(request->corsConfiguration);
 	}

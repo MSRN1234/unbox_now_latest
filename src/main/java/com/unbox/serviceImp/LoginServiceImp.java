@@ -34,7 +34,7 @@ public class LoginServiceImp implements ILoginService {
 		UserLogin userLogin1=userLoginRepo.findByName(loginRequestDTO.getUser_name());
 		if(userLogin1==null) {
 			UserLogin userLogin=new UserLogin();
-			userLogin.setSignup_with(loginRequestDTO.getSignup_with());
+			userLogin.setSignupWith(loginRequestDTO.getSignupWith());
 			userLogin.setPassword(bcrypt.encode(loginRequestDTO.getPassword()));
 			userLogin.setUser_name(loginRequestDTO.getUser_name());
 			userLogin.setValidated(false);
@@ -53,8 +53,14 @@ public class LoginServiceImp implements ILoginService {
 			
 			loginResponseDTO.setId(profile1.getUser_profile_id());
 			loginResponseDTO.setId(userLogin2.getUser_id());
+<<<<<<< HEAD
 			loginResponseDTO.setRole(userLogin2.getUser_type_id()==1?"Corporate":"Individual");
 			loginResponseDTO.setMessage("email sent successfully");
+=======
+			loginResponseDTO.setRole(userLogin2.getUser_type_id()==1?"Coporator":"Individual");
+			loginResponseDTO.setMessage("Successfull");
+			
+>>>>>>> 3ff3aa2a2da01db05b6f8342894205ded5bfc501
 				return loginResponseDTO;
 			}
 		
@@ -70,8 +76,8 @@ public class LoginServiceImp implements ILoginService {
 			boolean password=  bcrypt.matches(loginRequestDTO.getPassword(), userLogin1.getPassword());
 			if(userLogin1!=null && password==true ) {
 				loginResponseDTO.setId(userLogin1.getUser_id());
-				loginResponseDTO.setRole(userLogin1.getUser_type_id()==1?"Corporate":"Individual");
-				loginResponseDTO.setMessage("signin Successfully");
+				loginResponseDTO.setRole(userLogin1.getUser_type_id()==1?"Coporator":"Individual");
+				loginResponseDTO.setMessage("Successfull");
 				return loginResponseDTO;
 		     }
 		
