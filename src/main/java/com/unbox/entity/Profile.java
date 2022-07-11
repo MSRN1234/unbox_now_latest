@@ -13,8 +13,8 @@ public class Profile {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
     private Integer user_profile_id;
-//    private Integer user_id;
-    private String full_name;
+    private Integer user_Id;
+    private String name;
     private String email;
     private String mobile_no;
     private String address_Line_1;
@@ -28,17 +28,17 @@ public class Profile {
 	public void setUser_profile_id(Integer user_profile_id) {
 		this.user_profile_id = user_profile_id;
 	}
-//	public Integer getUser_id() {
-//		return user_id;
-//	}
-//	public void setUser_Id(Integer user_id) {
-//		this.user_id = user_id;
-//	}
+	public Integer getUser_id() {
+		return user_Id;
+	}
+	public void setUser_Id(Integer user_id) {
+		this.user_Id = user_id;
+	}
 	public String getFull_name() {
-		return full_name;
+		return name;
 	}
 	public void setFull_name(String full_name) {
-		this.full_name = full_name;
+		this.name = full_name;
 	}
 	public String getEmail() {
 		return email;

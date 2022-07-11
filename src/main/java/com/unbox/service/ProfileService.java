@@ -6,4 +6,5 @@ import com.unbox.ResponseDTO.ProfileResponseDTO;
 public interface ProfileService{
 	public ProfileResponseDTO userProfile(ProfileRequestDTO profileRequestDTO);
 
+	
 }

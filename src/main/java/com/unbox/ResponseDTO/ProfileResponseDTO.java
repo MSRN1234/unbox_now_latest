@@ -5,8 +5,15 @@ public class ProfileResponseDTO {
 	private Integer user_profile_id;
 	private String full_name;
     private String message;
+    private Integer user_Id;
     
     
+	public Integer getUser_Id() {
+		return user_Id;
+	}
+	public void setUser_Id(Integer user_Id) {
+		this.user_Id = user_Id;
+	}
 	public Integer getUser_profile_id() {
 		return user_profile_id;
 	}

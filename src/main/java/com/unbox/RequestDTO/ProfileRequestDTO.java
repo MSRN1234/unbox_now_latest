@@ -3,7 +3,7 @@ package com.unbox.RequestDTO;
 public class ProfileRequestDTO {
 
 	private Integer user_profile_id;
-//    private Integer user_id;
+    private Integer user_id;
     private String full_name;
     private String email;
     private String mobile_no;
@@ -18,12 +18,12 @@ public class ProfileRequestDTO {
 	public void setUser_profile_id(Integer user_profile_id) {
 		this.user_profile_id = user_profile_id;
 	}
-//	public Integer getUser_id() {
-//		return user_id;
-//	}
-//	public void setUser_id(Integer user_id) {
-//		this.user_id = user_id;
-//	}
+	public Integer getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(Integer user_id) {
+		this.user_id = user_id;
+	}
 	public String getFull_name() {
 		return full_name;
 	}
