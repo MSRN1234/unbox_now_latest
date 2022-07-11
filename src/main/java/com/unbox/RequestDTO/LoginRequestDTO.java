@@ -7,7 +7,6 @@ import javax.validation.constraints.Size;
 public class LoginRequestDTO {
 
 	private Integer user_id;
-	private String full_name;
 	private String user_name;
 	private Integer user_type_id;
 	private boolean validated;
@@ -15,10 +14,17 @@ public class LoginRequestDTO {
 	@Size(min = 4, message = "Password must be 4 characters")
 	private String password;
 	@NotNull
-	private String signup_with;
+	private String signupWith;
 
 	
 
+	public String getSignupWith() {
+		return signupWith;
+	}
+
+	public void setSignupWith(String signupWith) {
+		this.signupWith = signupWith;
+	}
 
 	public Integer getUser_id() {
 		return user_id;
@@ -26,14 +32,6 @@ public class LoginRequestDTO {
 
 	public void setUser_id(Integer user_id) {
 		this.user_id = user_id;
-	}
-
-	public String getFull_name() {
-		return full_name;
-	}
-
-	public void setFull_name(String full_name) {
-		this.full_name = full_name;
 	}
 
 	public String getUser_name() {
@@ -68,14 +66,5 @@ public class LoginRequestDTO {
 		this.password = password;
 	}
 
-	public String getSignup_with() {
-		return signup_with;
-	}
-
-	public void setSignup_with(String signup_with) {
-		this.signup_with = signup_with;
-	}
-
-	
 	
 }
