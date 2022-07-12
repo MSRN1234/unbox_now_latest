@@ -6,10 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+
 
 @Entity
 @Table(name="ubn_user_login")
@@ -30,13 +27,6 @@ public class UserLogin {
 	private String signup_with;
 	
 	
-	
-	public String getSignupWith() {
-		return signup_with;
-	}
-	public void setSignupWith(String signupWith) {
-		this.signup_with = signupWith;
-	}
 	public Integer getUser_id() {
 		return user_id;
 	}
@@ -68,5 +58,14 @@ public class UserLogin {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	
+	public String getSignup_with() {
+		return signup_with;
+	}
+	public void setSignup_with(String signup_with) {
+		this.signup_with = signup_with;
+	}
+	
 
 }

@@ -17,7 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.unbox.RequestDTO.LoginRequestDTO;
 import com.unbox.ResponseDTO.LoginResponseDTO;
-import com.unbox.entity.UserLogin;
+import com.unbox.entity.EmailDetails;
+import com.unbox.service.EmailService;
 import com.unbox.service.ILoginService;
 
 @RestController
@@ -25,20 +26,16 @@ public class UserController {
 
 	@Autowired
 	private ILoginService loginService;
-
 	@Autowired
 	private EmailService emailService;
 	@Autowired
 	private JavaMailSender javaMailSender;
-
-
 
 	@PostMapping("/signUp")
 	public ResponseEntity<?> signUp(@Valid @RequestBody LoginRequestDTO loginRequestDTO) throws MessagingException {
 		LoginResponseDTO loginResponseDTO=loginService.signUp(loginRequestDTO);
 		Map<String,Object> map=new HashMap<String,Object>();
 		   if(loginResponseDTO.getId()!=null)
-
 			   {
 			   if(loginRequestDTO.getUser_name().contains("@")) {
 				   EmailDetails emailDetails =new EmailDetails();
@@ -228,9 +225,6 @@ public class UserController {
 //				   String status= emailService.sendSimpleMail(emailDetails);
 			   }
 			  
-
-		   {
-
 			   map.put("msg","signUp successfull ");
 			   map.put("data",loginResponseDTO);
 			   map.put("status",true);
@@ -249,10 +243,11 @@ public class UserController {
 		Map<String,Object> map=new HashMap<String,Object>();
 		   if(loginResponseDTO.getId()!=null)
 		   {
-			   map.put("msg","signIp successfull ");
+			   
+			   map.put("msg","signIn successfull ");
 			   map.put("data",loginResponseDTO);
 			   map.put("status",true);
-				return ResponseEntity.status(HttpStatus.OK).body(map);
+			   return ResponseEntity.status(HttpStatus.OK).body(map);
 		   }	
 		   map.put("msg","Bad Credentials");
 		   map.put("data",loginResponseDTO);
@@ -261,7 +256,6 @@ public class UserController {
 				
 	}
 	
-
 	// email sending controller
 	@PostMapping("/sendMail")
     public String sendMail(@RequestBody EmailDetails details) {
@@ -270,4 +264,5 @@ public class UserController {
       	}
 	
 
+    
 }
