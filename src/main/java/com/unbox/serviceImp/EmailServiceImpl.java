@@ -10,7 +10,7 @@ import com.unbox.entity.EmailDetails;
 import com.unbox.service.EmailService;
 
 @Service
-public class EmailServiceImpl implements EmailService{
+public abstract class EmailServiceImpl implements EmailService{
 
 	@Autowired 
 	private JavaMailSender javaMailSender;
@@ -20,18 +20,18 @@ public class EmailServiceImpl implements EmailService{
 	private String sender;
 	@Override
 	public String sendSimpleMail(EmailDetails details) {
-		try {
-			SimpleMailMessage mailMessage = new SimpleMailMessage();
-			mailMessage.setFrom(sender);
-            mailMessage.setTo(details.getRecipient());
-            mailMessage.setText(details.getMsgBody());
-            mailMessage.setSubject(details.getSubject());
-            javaMailSender.send(mailMessage);
-            return "Mail Sent Successfully...";
-            
-		}
-		catch (Exception e) {
+//		try {
+//			SimpleMailMessage mailMessage = new SimpleMailMessage();
+//			mailMessage.setFrom(sender);
+//            mailMessage.setTo(details.getRecipient());
+//            mailMessage.setText(details.getMsgBody());
+//            mailMessage.setSubject(details.getSubject());
+//            javaMailSender.send(mailMessage);
+//            return "Mail Sent Successfully...";
+//            
+//		}
+//		catch (Exception e) {
             return "Error while Sending Mail";
-        }
+   //     }
     }
  }
