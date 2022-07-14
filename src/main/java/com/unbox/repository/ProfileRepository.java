@@ -8,6 +8,8 @@ import com.unbox.entity.Profile;
 @Repository
 public interface ProfileRepository extends JpaRepository<Profile, Integer> {
 
-	@Query("SELECT t FROM Profile t WHERE t.user_Id= ?1")
+    @Query("SELECT t FROM Profile t WHERE t.user_Id= ?1")
 	public Profile findByUser_Id(Integer id);
+	
+
 }

@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -21,7 +22,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.unbox.RequestDTO.EmailRequestDTO;
 import com.unbox.RequestDTO.LoginRequestDTO;
 import com.unbox.ResponseDTO.LoginResponseDTO;
+import com.unbox.entity.CorporateProfile;
 import com.unbox.entity.EmailDetails;
+import com.unbox.entity.Profile;
 import com.unbox.service.ILoginService;
 
 @RestController
@@ -365,4 +368,19 @@ public class UserController {
 
 	}
 
+	@GetMapping("/profile")
+	public ResponseEntity<?> getProfile(@Param("user_id") Integer user_id,@Param("user_type") String user_type){
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(user_type.equals("Corporate")) {
+			CorporateProfile corporateProfile=this.loginService.getCorporateProfile(user_id);
+			map.put("msg", "Corporate profile");
+			map.put("data",corporateProfile );
+		}
+		else {
+			Profile profile=this.loginService.getIndividualProfile(user_id);
+			map.put("msg", "Individual profile");
+			map.put("data",profile );
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(map);
+	}
 }

@@ -5,14 +5,14 @@ import javax.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.unbox.RequestDTO.EmailRequestDTO;
 import com.unbox.RequestDTO.LoginRequestDTO;
 import com.unbox.ResponseDTO.LoginResponseDTO;
+import com.unbox.entity.CorporateProfile;
 import com.unbox.entity.Profile;
 import com.unbox.entity.UserLogin;
+import com.unbox.repository.CorporateProfileRepository;
 import com.unbox.repository.ProfileRepository;
 import com.unbox.repository.UserLoginRepository;
 import com.unbox.service.ILoginService;
@@ -30,40 +30,54 @@ public class LoginServiceImp implements ILoginService {
 	private BCryptPasswordEncoder bcrypt;
 	@Autowired
 	private ForgotPasswordService forgotPasswordService;
+	@Autowired
+	private CorporateProfileRepository corporateProfileRepository;
 
-	@Override
-	public LoginResponseDTO signUp(LoginRequestDTO loginRequestDTO) {
-		LoginResponseDTO loginResponseDTO = new LoginResponseDTO();
-		UserLogin userLogin1 = userLoginRepo.findByName(loginRequestDTO.getUser_name());
-		if (userLogin1 == null) {
-			UserLogin userLogin = new UserLogin();
-			userLogin.setSignup_with(loginRequestDTO.getSignup_with());
-			userLogin.setPassword(bcrypt.encode(loginRequestDTO.getPassword()));
-			userLogin.setUser_name(loginRequestDTO.getUser_name());
-			userLogin.setValidated(false);
-			userLogin.setUser_type_id(loginRequestDTO.getUser_type_id());
-			UserLogin userLogin2 = userLoginRepo.save(userLogin);
+	 @Override
+	    public LoginResponseDTO signUp(LoginRequestDTO loginRequestDTO){
+	        LoginResponseDTO loginResponseDTO=new LoginResponseDTO();
+	        UserLogin userLogin1=userLoginRepo.findByName(loginRequestDTO.getUser_name());
+	        if(userLogin1==null) {
+	            UserLogin userLogin=new UserLogin();
+	            userLogin.setSignup_with(loginRequestDTO.getSignup_with());
+	            userLogin.setPassword(bcrypt.encode(loginRequestDTO.getPassword()));
+	            userLogin.setUser_name(loginRequestDTO.getUser_name());
+	            userLogin.setValidated(false);
+	            userLogin.setUser_type_id(loginRequestDTO.getUser_type_id());
+	            UserLogin userLogin2=userLoginRepo.save(userLogin);
 
-			Profile profile = new Profile();
-			profile.setUser_Id(userLogin2.getUser_id());
-			profile.setFull_name(loginRequestDTO.getFull_name());
-			if (loginRequestDTO.getSignup_with().equals("email")) {
-				profile.setEmail(userLogin2.getUser_name());
-			} else {
-				profile.setMobile_no(userLogin2.getUser_name());
-			}
-			Profile profile1 = profileRepository.save(profile);
+	            if(loginRequestDTO.getUser_type_id()==1) {
+	                CorporateProfile corporateProfile=new CorporateProfile();
+	                corporateProfile.setUser_Id(userLogin2.getUser_id());
+	                corporateProfile.setBusiness_name(loginRequestDTO.getFull_name());
+	                if(loginRequestDTO.getSignup_with().equals("email")) {
+	                    corporateProfile.setBusiness_email(userLogin2.getUser_name());
+	                }else {
+	                    corporateProfile.setMobile_no(userLogin2.getUser_name());;
+	                }
+	                this.corporateProfileRepository.save(corporateProfile);
+	                loginResponseDTO.setId(userLogin2.getUser_id());
+	            }else {
+	                Profile profile=new Profile();
+	                profile.setUser_Id(userLogin2.getUser_id());
+	                profile.setFull_name(loginRequestDTO.getFull_name());
+	                if(loginRequestDTO.getSignup_with().equals("email")) {
+	                     profile.setEmail(userLogin2.getUser_name());
+	                }else {
+	                    profile.setMobile_no(userLogin2.getUser_name());
+	                }
+	                this.profileRepository.save(profile);
+	                loginResponseDTO.setId(userLogin2.getUser_id());
+	            }
 
-			loginResponseDTO.setId(profile1.getUser_profile_id());
-			loginResponseDTO.setId(userLogin2.getUser_id());
-			loginResponseDTO.setRole(userLogin2.getUser_type_id() == 1 ? "Corporate" : "Individual");
-			loginResponseDTO.setMessage("email sent successfully");
-			return loginResponseDTO;
-		}
+	            loginResponseDTO.setRole(userLogin2.getUser_type_id()==1?"Corporate":"Individual");
+	            loginResponseDTO.setMessage("email sent successfully");
+	                return loginResponseDTO;
+	            }
 
-		loginResponseDTO.setMessage("Already Exist");
-		return loginResponseDTO;
-	}
+	        loginResponseDTO.setMessage("Already Exist");
+	        return loginResponseDTO;
+	    }
 
 	@Override
 	public LoginResponseDTO signIn(LoginRequestDTO loginRequestDTO) {
@@ -113,6 +127,16 @@ public class LoginServiceImp implements ILoginService {
 		this.userLoginRepo.save(userLogin1);
 		return "password updated";
 		
+	}
+	@Override
+	public Profile getIndividualProfile(Integer Id) {
+		return profileRepository.findByUser_Id(Id);
+	}
+
+	@Override
+	public CorporateProfile getCorporateProfile(Integer Id) {
+		//System.out.print(corporateProfileRepository.findByUser_Id(Id));
+		return corporateProfileRepository.findByUser_Id(Id);
 	}
 
 }
