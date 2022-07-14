@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="ubn_user_profile")
+@Table(name="ubn_individual_profile")
 public class Profile {
 
 	@Id

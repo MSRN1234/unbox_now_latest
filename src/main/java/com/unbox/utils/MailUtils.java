@@ -1,4 +1,4 @@
-package utils;
+package com.unbox.utils;
 import java.util.Properties;
 
 import javax.mail.MessagingException;

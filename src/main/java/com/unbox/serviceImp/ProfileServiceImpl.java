@@ -21,14 +21,14 @@ public class ProfileServiceImpl implements ProfileService{
 		ProfileResponseDTO profileResponseDTO=new ProfileResponseDTO();
 		Profile profile =profileRepo.findByUser_Id(profileRequestDTO.getUser_id());
 		if(profile!=null) {
-		    if(profile.getFull_name()==null) profile.setFull_name(profileRequestDTO.getFull_name());
-		    if(profile.getEmail()==null)profile.setEmail(profileRequestDTO.getEmail());
-		    if(profile.getMobile_no()==null)profile.setMobile_no(profileRequestDTO.getMobile_no());
-		    if(profile.getAddress_Line_1()==null)profile.setAddress_Line_1(profileRequestDTO.getAddress_Line_1());
-		    if(profile.getAddress_Line_2()==null)profile.setAddress_Line_2(profileRequestDTO.getAddress_Line_2());
-		    if(profile.getCity()==null)profile.setCity(profileRequestDTO.getCity());
-		    if(profile.getState()==null)profile.setState(profileRequestDTO.getState());
-		    if(profile.getZipCode()==null)profile.setZipCode(profileRequestDTO.getZipCode());
+		    profile.setFull_name(profileRequestDTO.getFull_name());
+		    profile.setEmail(profileRequestDTO.getEmail());
+		    profile.setMobile_no(profileRequestDTO.getMobile_no());
+		    profile.setAddress_Line_1(profileRequestDTO.getAddress_Line_1());
+		    profile.setAddress_Line_2(profileRequestDTO.getAddress_Line_2());
+		    profile.setCity(profileRequestDTO.getCity());
+		    profile.setState(profileRequestDTO.getState());
+		    profile.setZipCode(profileRequestDTO.getZipCode());
 			Profile profile2=profileRepo.save(profile);
 			profileResponseDTO.setUser_profile_id(profile2.getUser_profile_id());
 			profileResponseDTO.setUser_Id(profile2.getUser_id());
