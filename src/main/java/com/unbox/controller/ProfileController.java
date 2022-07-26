@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -113,7 +114,31 @@ public class ProfileController {
 				return ResponseEntity.status(HttpStatus.OK).body(map);
 				
 		}
+	
 		   
 	} 
+	
+	@GetMapping("/Profile/{id}")
+	public ResponseEntity<?> userProfile( @PathVariable Integer id) {
+		 Profile profile=profileService.getProfile(id);
+		Map<String,Object> map=new HashMap<String,Object>();
+		if(profile.getUser_profile_id()!=null)
+		   {
+			   
+			   map.put("msg"," ");
+			   map.put("data",profile);
+			   map.put("status",true);
+			   return ResponseEntity.status(HttpStatus.OK).body(map);
+		   }	
+		else {
+			map.put("msg","invalid details");
+			   map.put("data",profile);
+			   map.put("status",false);
+				return ResponseEntity.status(HttpStatus.OK).body(map);
+					
+		}
+		   
+	}
+	
 	
 }

@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -321,6 +322,7 @@ public class UserController {
 //				   String status= emailService.sendSimpleMail(emailDetails);
 			}
 
+			
 			map.put("msg", "signUp successfull ");
 			map.put("data", loginResponseDTO);
 			map.put("status", true);
@@ -383,4 +385,16 @@ public class UserController {
 		}
 		return ResponseEntity.status(HttpStatus.OK).body(map);
 	}
+	
+	  //your profile handler
+	//@GetMapping("/getUserProfilet/{id}")
+	 // public String yourProfile(Model model) {
+		
+	//	model.addAttribute("title","Profile page");
+		//return  "normal/profile";	
+		  
+	 // }
+	
+
+	
 }

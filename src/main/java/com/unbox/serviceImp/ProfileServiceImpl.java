@@ -14,7 +14,8 @@ public class ProfileServiceImpl implements ProfileService{
 	
 	@Autowired
 	 private ProfileRepository profileRepo;
-	
+
+	 
 
 	@Override
 	public ProfileResponseDTO userProfile(ProfileRequestDTO profileRequestDTO) {
@@ -40,6 +41,12 @@ public class ProfileServiceImpl implements ProfileService{
 		return profileResponseDTO;
 	}
 
+	@Override
+	public Profile getProfile(Integer id ) {
+	
+		return profileRepo.findByUser_Id(id);
+	}
+	
  
 
 

@@ -3,8 +3,10 @@ package com.unbox.config;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -64,7 +66,7 @@ public class MyConfig extends WebSecurityConfigurerAdapter {
 		corsConfiguration.setExposedHeaders(exposedHeaders);
 		
 		http.csrf().and().cors().disable().formLogin();		
-		http.authorizeRequests().antMatchers("/signUp","/signIn","/sendMail","/userProfile","/corporateProfile","/user/{user_id}","/send-otp","/verify-email-otp","/set-password/{email}","/profile").permitAll()
+		http.authorizeRequests().antMatchers("/signUp","/signIn","/sendMail","/userProfile","/corporateProfile","/user/{user_id}","/send-otp","/verify-email-otp","/set-password/{email}","/profile","/Profile/{id}").permitAll()
 		
 		.anyRequest().authenticated().and().csrf().disable().cors().configurationSource(request->corsConfiguration);
 	}
@@ -72,4 +74,7 @@ public class MyConfig extends WebSecurityConfigurerAdapter {
 	public RestTemplate getResttemplate() {
 		return new RestTemplate();
 	}
+	
+		
+	
 }
